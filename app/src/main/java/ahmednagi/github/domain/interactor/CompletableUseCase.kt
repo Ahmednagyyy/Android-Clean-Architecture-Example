@@ -7,15 +7,15 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.observers.DisposableCompletableObserver
 import io.reactivex.schedulers.Schedulers
 
-abstract class CompletableService<in params>
+abstract class CompletableUseCase<in params>
 constructor(private val executionThread: ExecutionThread) {
 
     private val compositeDisposable = CompositeDisposable()
 
-    protected abstract fun buildCompletableService(params: params? = null): Completable
+    protected abstract fun buildCompletableUseCase(params: params? = null): Completable
 
     open fun execute(completable: DisposableCompletableObserver, params: params? = null) {
-        val observable = this.buildCompletableService(params)
+        val observable = this.buildCompletableUseCase(params)
             .subscribeOn(Schedulers.io())
             .observeOn(executionThread.scheduler)
         addDisposable(observable.subscribeWith(completable))
