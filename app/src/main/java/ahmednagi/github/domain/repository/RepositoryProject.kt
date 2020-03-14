@@ -6,7 +6,7 @@ import io.reactivex.Observable
 
 interface RepositoryProject {
 
-    fun getProject(): Observable<List<Project>>
+    fun getProjects(): Observable<List<Project>>
 
     fun getBookmarkedProjects(): Observable<List<Project>>
 
